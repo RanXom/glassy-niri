@@ -1,0 +1,21 @@
+/* Hide Electron window controls */
+div[aria-label="Close window"],
+div[aria-label="Minimize"],
+div[aria-label="Restore down"],
+div[aria-label="Maximize"] {
+  display: none !important;
+}
+
+/* Remove reserved space for them */
+.is-hidden-frameless:not(.is-fullscreen)
+.workspace-tabs.mod-top-right-space
+.workspace-tab-header-container {
+  padding-right: 0 !important;
+}
+
+.is-hidden-frameless:not(.is-fullscreen)
+.workspace-tabs.mod-top-right-space
+.workspace-tab-header-container:after {
+  display: none !important;
+}
+

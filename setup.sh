@@ -26,7 +26,7 @@ backup() {
   if [ -e "$target" ]; then
     local backup_name="${target}.bak.$(timestamp)"
     mv "$target" "$backup_name"
-    echo "[+] Backup: $backup_name"
+    echo "[+] Backup created: $backup_name"
   fi
 }
 
@@ -84,7 +84,7 @@ if [[ "$ACTION" == "1" || "$ACTION" == "3" ]]; then
   fi
 
   echo ""
-  echo "---- Module Selection ----"
+  echo "[*] Starting module installation..."
   echo ""
 
   ask "Install Niri?" && install_module "niri" "$DOTS_DIR/config/niri" "$HOME/.config/niri"
@@ -109,8 +109,12 @@ if [[ "$ACTION" == "1" || "$ACTION" == "3" ]]; then
       echo "[DRY RUN] Would copy wallpapers -> $WALL_DIR"
     else
       mkdir -p "$WALL_DIR"
-      cp -r "$DOTS_DIR/wallpapers/"* "$WALL_DIR"
-      echo "[+] Wallpapers installed"
+      if compgen -G "$DOTS_DIR/wallpapers/*" >/dev/null; then
+        cp -r "$DOTS_DIR/wallpapers/"* "$WALL_DIR"
+        echo "[+] Wallpapers installed"
+      else
+        echo "[!] No wallpapers found"
+      fi
     fi
   fi
 

@@ -120,12 +120,6 @@ fi
 # ---------------- INSTALL ----------------
 if [[ "$ACTION" == "1" || "$ACTION" == "3" ]]; then
 
-  if [[ "$ACTION" == "1" ]]; then
-    echo "This will modify your config files (backups will be created)."
-    read -p "Continue? (y/N): " confirm
-    [[ ! "$confirm" =~ ^[Yy]$ ]] && exit 0
-  fi
-
   echo ""
   echo "[*] Starting module installation..."
   echo ""
@@ -134,7 +128,26 @@ if [[ "$ACTION" == "1" || "$ACTION" == "3" ]]; then
 
   ask "Install Kitty?" && install_module "kitty" "$DOTS_DIR/config/kitty" "$HOME/.config/kitty"
 
-  ask "Install Fastfetch?" && install_module "fastfetch" "$DOTS_DIR/config/fastfetch" "$HOME/.config/fastfetch"
+  if ask "Install Fastfetch?"; then
+    install_module "fastfetch" "$DOTS_DIR/config/fastfetch" "$HOME/.config/fastfetch"
+
+    if [[ "$ACTION" != "3" ]]; then
+      echo ""
+      echo "--------------------------------------"
+      echo "Fastfetch Custom Logo Notice"
+      echo "--------------------------------------"
+      echo "A custom ASCII logo (logo.txt) has been installed."
+      echo "This replaces the default Fastfetch logo."
+      echo ""
+      echo "If you want the default logo back:"
+      echo "  - Edit ~/.config/fastfetch/config.jsonc and remove the 'logo' section"
+      echo "  - OR delete ~/.config/fastfetch/logo.txt"
+      echo "--------------------------------------"
+      echo ""
+    else
+      echo "[DRY RUN] Would install Fastfetch (includes custom logo)"
+    fi
+  fi
 
   ask "Install Noctalia?" && install_module "noctalia" "$DOTS_DIR/config/noctalia" "$HOME/.config/noctalia"
 

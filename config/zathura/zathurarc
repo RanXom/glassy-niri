@@ -1,0 +1,11 @@
+set default-bg "#121314"
+set default-fg "#d8dee9"
+set statusbar-bg "#121314"
+set statusbar-fg "#d8dee9"
+set inputbar-bg "#121314"
+set inputbar-fg "#d8dee9"
+
+set recolor true
+set recolor-lightcolor "#121314"
+set recolor-darkcolor "#d8dee9"
+

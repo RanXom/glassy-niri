@@ -74,6 +74,49 @@ ask() {
 
 echo ""
 
+if [[ "$ACTION" == "1" ]]; then
+  echo ""
+  echo "======================================"
+  echo "   IMPORTANT SETUP NOTES"
+  echo "======================================"
+  echo ""
+  echo "[1] Font Requirement"
+  echo "This setup uses JetBrains Mono Nerd Font."
+  echo ""
+  echo "Install it before proceeding:"
+  echo "  Arch Linux: sudo pacman -S ttf-jetbrains-mono-nerd"
+  echo "  Or install manually from Nerd Fonts."
+  echo ""
+  echo "[2] Display Configuration (VERY IMPORTANT!!)"
+  echo "This Niri config is designed for high-DPI displays."
+  echo ""
+  echo "- If your display is below 2K, set scale to 1"
+  echo "- You MUST edit the output section to match your monitor"
+  echo ""
+  echo "Run this command inside Niri to get your display info:"
+  echo "  niri msg outputs"
+  echo ""
+  echo "Then update:"
+  echo "  - resolution"
+  echo "  - refresh rate"
+  echo "  - scale"
+  echo ""
+  echo "Example (from this setup):"
+  echo ""
+  echo "  output \"eDP-2\" {"
+  echo "      mode \"2560x1600@60.002\""
+  echo "      scale 1.5"
+  echo "  }"
+  echo ""
+  echo "If you skip this, your layout WILL break!!"
+  echo ""
+  echo "======================================"
+  echo ""
+
+  read -p "Continue with installation? (y/N): " confirm
+  [[ ! "$confirm" =~ ^[Yy]$ ]] && exit 0
+fi
+
 # ---------------- INSTALL ----------------
 if [[ "$ACTION" == "1" || "$ACTION" == "3" ]]; then
 
